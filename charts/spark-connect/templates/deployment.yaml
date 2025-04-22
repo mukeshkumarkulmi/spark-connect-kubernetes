@@ -111,10 +111,8 @@ spec:
           {{- end }}
           args:
             - >-
-              envsubst < /opt/spark/conf/spark-properties.conf.template > /opt/spark/spark-properties.conf &&
-              envsubst < /opt/spark/conf/executor-pod-template.yaml.template > /opt/spark/executor-pod-template.yaml &&
-              /opt/entrypoint.sh
-              /opt/spark/sbin/start-connect-server.sh --properties-file /opt/spark/spark-properties.conf
+              /opt/spark/kubernetes/dockerfiles/spark/entrypoint.sh
+              /opt/spark/sbin/start-connect-server.sh --properties-file /opt/spark/conf/spark-properties.conf
             {{- with .Values.extraArgs }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
